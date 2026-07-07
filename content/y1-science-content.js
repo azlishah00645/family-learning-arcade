@@ -13,6 +13,8 @@
      safe / magnetic / absorbs : true or false (no quotes!)
      prompt, choices, answer   : quiz lines — answer must match
                                  one choice exactly
+   ⚠️ ORDER MATTERS: lists play from TOP to BOTTOM in the game,
+   so keep the EASY ones first and the TRICKY ones last!
    Save the file, refresh the game — done! 🎉
    ============================================================ */
 
@@ -88,16 +90,16 @@ window.Y1_SCIENCE_CONTENT = {
     ],
     items: [
       { label: "cat",       emoji: "🐱", bin: "living" },
-      { label: "tree",      emoji: "🌳", bin: "living" },
       { label: "rock",      emoji: "🪨", bin: "nonliving" },
-      { label: "car",       emoji: "🚗", bin: "nonliving" },
       { label: "fish",      emoji: "🐟", bin: "living" },
-      { label: "pencil",    emoji: "✏️", bin: "nonliving" },
-      { label: "sunflower", emoji: "🌻", bin: "living" },
       { label: "chair",     emoji: "🪑", bin: "nonliving" },
       { label: "bird",      emoji: "🐦", bin: "living" },
       { label: "ball",      emoji: "⚽", bin: "nonliving" },
       { label: "baby",      emoji: "👶", bin: "living" },
+      { label: "pencil",    emoji: "✏️", bin: "nonliving" },
+      { label: "tree",      emoji: "🌳", bin: "living" },
+      { label: "sunflower", emoji: "🌻", bin: "living" },
+      { label: "car",       emoji: "🚗", bin: "nonliving" },
       { label: "robot",     emoji: "🤖", bin: "nonliving" }
     ]
   },
@@ -167,12 +169,13 @@ window.Y1_SCIENCE_CONTENT = {
     items: [
       { label: "paper clip",  emoji: "📎", magnetic: true },
       { label: "iron nail",   emoji: "🔩", magnetic: true },
-      { label: "steel spoon", emoji: "🥄", magnetic: true },
-      { label: "safety pin",  emoji: "🧷", magnetic: true },
       { label: "wood block",  emoji: "🪵", magnetic: false },
       { label: "paper",       emoji: "📄", magnetic: false },
-      { label: "plastic cup", emoji: "🥤", magnetic: false },
       { label: "leaf",        emoji: "🍃", magnetic: false },
+      { label: "steel spoon", emoji: "🥄", magnetic: true },
+      { label: "plastic cup", emoji: "🥤", magnetic: false },
+      { label: "safety pin",  emoji: "🧷", magnetic: true },
+      { label: "metal fork",  emoji: "🍴", magnetic: true },
       { label: "eraser",      emoji: "🩹", magnetic: false }
     ]
   },
@@ -182,13 +185,13 @@ window.Y1_SCIENCE_CONTENT = {
     items: [
       { label: "tissue paper", emoji: "🧻", absorbs: true },
       { label: "sponge",       emoji: "🧽", absorbs: true },
-      { label: "cotton shirt", emoji: "👕", absorbs: true },
-      { label: "newspaper",    emoji: "📰", absorbs: true },
       { label: "plastic cup",  emoji: "🥤", absorbs: false },
+      { label: "cotton shirt", emoji: "👕", absorbs: true },
       { label: "tin can",      emoji: "🥫", absorbs: false },
+      { label: "newspaper",    emoji: "📰", absorbs: true },
       { label: "glass",        emoji: "🪟", absorbs: false },
-      { label: "balloon",      emoji: "🎈", absorbs: false },
       { label: "sock",         emoji: "🧦", absorbs: true },
+      { label: "balloon",      emoji: "🎈", absorbs: false },
       { label: "metal spoon",  emoji: "🥄", absorbs: false }
     ]
   },

@@ -1,13 +1,17 @@
 /* ============================================================
    MATHS JUNGLE — Year 1 Maths side-scrolling platformer.
-   Run, jump, collect coins, answer 5 question gates per chapter.
+   Run, jump, collect coins, answer 10 question gates per chapter
+   (picked 4 easy + 3 medium + 3 hard, ordered easy → hard).
    Registered for { grade: "Year 1", subject: "maths" }.
    ============================================================ */
 (function () {
   const GAME_ID = "maths-jungle";
   const TITLE = "Maths Jungle";
   const CHARACTERS = ["🧒", "👧", "🤖"];
-  const GATE_XS = [700, 1500, 2300, 3100, 3900];
+  /* 10 question gates per chapter (kept clear of the two pits) */
+  const GATE_XS = [600, 980, 1360, 1740, 2120, 2500, 2950, 3300, 3650, 4000];
+  const GATES_N = GATE_XS.length;
+  const PASS_N = 8; /* pass = at least 8/10 first-try */
   const WORLD_W = 4800;
   const VIEW_W = 960, VIEW_H = 540;
 
@@ -30,15 +34,29 @@
     return !!(prev && prev.passed);
   }
 
+  function shuffle(arr) {
+    const a = arr.slice();
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      const t = a[i]; a[i] = a[j]; a[j] = t;
+    }
+    return a;
+  }
+
+  /* Picks 10 questions: 4 easy + 3 medium + 3 hard (random within
+     each difficulty), then sorts them easy → hard so every chapter
+     ramps up gently. */
   function pickQuestions(levelId) {
     const bank = (window.Y1_MATHS_QUESTIONS || []).filter(function (q) { return q.level === levelId; });
-    const pool = bank.slice();
-    for (let i = pool.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      const t = pool[i]; pool[i] = pool[j]; pool[j] = t;
+    function tier(d) { return shuffle(bank.filter(function (q) { return (q.difficulty || 2) === d; })); }
+    let picked = tier(1).slice(0, 4).concat(tier(2).slice(0, 3), tier(3).slice(0, 3));
+    if (picked.length < GATES_N) { /* a tier ran short — top up from the rest */
+      const left = shuffle(bank.filter(function (q) { return picked.indexOf(q) === -1; }));
+      picked = picked.concat(left.slice(0, GATES_N - picked.length));
     }
-    while (pool.length < 5 && bank.length) pool.push(bank[Math.floor(Math.random() * bank.length)]);
-    return pool.slice(0, 5);
+    while (picked.length < GATES_N && bank.length) picked.push(bank[Math.floor(Math.random() * bank.length)]);
+    picked.sort(function (a, b) { return (a.difficulty || 2) - (b.difficulty || 2); });
+    return picked.slice(0, GATES_N);
   }
 
   /* ---------------- level select (DOM) ---------------- */
@@ -281,7 +299,7 @@
       extend: {
 
       updateHud: function () {
-        this.hudScore.setText("⭐ " + this.score + "   ❓ " + this.gatesOpened + "/5");
+        this.hudScore.setText("⭐ " + this.score + "   ❓ " + this.gatesOpened + "/" + GATES_N);
       },
 
       hitGate: function (gate) {
@@ -292,7 +310,7 @@
         scene.physics.pause();
 
         const idx = gate.getData("idx");
-        QuestionPopup.show(scene.questions[idx], { index: idx + 1, total: 5 })
+        QuestionPopup.show(scene.questions[idx], { index: idx + 1, total: GATES_N })
           .then(function (res) {
             scene.results[idx] = !!res.firstTry;
             scene.score += 10;
@@ -319,8 +337,8 @@
         FX.confetti(30);
 
         const firstTry = scene.results.filter(Boolean).length;
-        const passed = firstTry >= 4;
-        const stars = firstTry === 5 ? 3 : (firstTry === 4 ? 2 : 1);
+        const passed = firstTry >= PASS_N;
+        const stars = firstTry === GATES_N ? 3 : (firstTry >= GATES_N - 1 ? 2 : 1);
 
         /* save under this profile */
         const p = prog();
@@ -349,7 +367,7 @@
               stars: stars,
               headline: [
                 { label: "Score", value: scene.score },
-                { label: "First-try answers", value: firstTry + " / 5" },
+                { label: "First-try answers", value: firstTry + " / " + GATES_N },
                 { label: passed ? "PASSED!" : "Keep trying!", value: passed ? "✅" : "💪" }
               ]
             },

@@ -175,12 +175,14 @@ window.MinigameEngine = (function () {
   /* ============================================================
      PLUG-IN: tapChoice
      config: { prompt?, rounds:[{prompt,big?,choices:[..],answer}],
-               shuffleRounds?: false }
-     Wrong answers retry gently (round only advances on correct).
+               shuffleRounds?: true }
+     Rounds play IN ORDER (author content easy → hard!);
+     set shuffleRounds: true for random order. Wrong answers
+     retry gently (round only advances on correct).
      ============================================================ */
   registerType("tapChoice", function (host, cfg, api) {
     return new Promise(function (resolve) {
-      const rounds = cfg.shuffleRounds === false ? cfg.rounds.slice() : shuffle(cfg.rounds);
+      const rounds = cfg.shuffleRounds === true ? shuffle(cfg.rounds) : cfg.rounds.slice();
       let i = 0;
 
       function round() {
@@ -224,10 +226,11 @@ window.MinigameEngine = (function () {
      config: { prompt, bins:[{id,label,emoji}],
                items:[{label,emoji,bin}] }
      One item at a time; TAP a basket or DRAG the item into it.
+     Items play IN ORDER — author content easy → hard!
      ============================================================ */
   registerType("binSort", function (host, cfg, api) {
     return new Promise(function (resolve) {
-      const items = shuffle(cfg.items);
+      const items = cfg.items.slice();
       let i = 0;
 
       function round() {
@@ -334,10 +337,11 @@ window.MinigameEngine = (function () {
      config: { question, yesLabel, noLabel, yesResult, noResult,
                items:[{label,emoji,result}], effect: "water" }
      Child PREDICTS, watches the animation, prediction is scored.
+     Items play IN ORDER — author content easy → hard!
      ============================================================ */
   registerType("predictReveal", function (host, cfg, api) {
     return new Promise(function (resolve) {
-      const items = shuffle(cfg.items);
+      const items = cfg.items.slice();
       let i = 0;
 
       function round() {

@@ -303,3 +303,121 @@ h2.screen-title {
   animation: toast .9s ease-out forwards; pointer-events: none;
 }
 @keyframes toast { 0% { opacity: 0; transform: translate(-50%, 12px) scale(.8); } 20% { opacity: 1; transform: translate(-50%,0) scale(1.05);} 80% { opacity: 1; } 100% { opacity: 0; transform: translate(-50%,-16px); } }
+
+/* ============================================================
+   Mini-game framework (shared: Science Island, Science Lab)
+   ============================================================ */
+.mg-overlay {
+  position: fixed; inset: 0; z-index: 200;
+  background: linear-gradient(160deg, #0f766e, #115e59);
+  display: flex; flex-direction: column;
+  overflow-y: auto; touch-action: pan-y;
+}
+.mg-header {
+  display: flex; align-items: center; gap: 12px;
+  padding: 10px 14px; flex: 0 0 auto;
+}
+.mg-title { color: #fff; font-weight: 900; font-size: clamp(17px, 3.4vw, 26px); flex: 1; text-align: center; }
+.mg-score { color: #fef08a; font-weight: 900; font-size: 20px; }
+
+.mg-stage {
+  flex: 1; display: flex; flex-direction: column; align-items: center;
+  justify-content: flex-start; gap: 12px; padding: 6px 14px 26px;
+  width: 100%; max-width: 900px; margin: 0 auto;
+}
+.mg-prompt {
+  color: #fff; font-size: clamp(19px, 3.6vw, 27px); font-weight: 800;
+  text-align: center; margin-top: 4px;
+}
+.mg-manual { display: inline-block; background: #fff; border-radius: 10px; padding: 4px 10px; line-height: 1.05; font-size: 18px; vertical-align: middle; }
+.mg-big { font-size: clamp(44px, 10vw, 76px); text-align: center; background: #ffffffde; border-radius: 20px; padding: 12px 26px; font-weight: 800; color: #1e293b; }
+.mg-progress { color: #99f6e4; font-weight: 800; font-size: 17px; }
+.mg-feedback { min-height: 30px; font-size: clamp(17px, 3vw, 23px); font-weight: 900; text-align: center; }
+.mg-feedback.good { color: #bbf7d0; }
+.mg-feedback.retry { color: #fde68a; }
+.mg-feedback.pop { animation: pop-in .25s ease-out; }
+
+/* targets + chips (drag & drop) */
+.mg-targets { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; width: 100%; }
+.mg-target {
+  background: #ffffffe8; border: 4px dashed #0d9488; border-radius: 18px;
+  min-width: 118px; padding: 8px 10px 10px; text-align: center;
+}
+.mg-target.got { border-style: solid; border-color: #16a34a; }
+.mg-target .t-emoji { font-size: 40px; line-height: 1.1; }
+.mg-target .t-label { font-weight: 900; color: #134e4a; font-size: 15px; }
+.mg-target .t-slot { display: flex; flex-wrap: wrap; gap: 4px; justify-content: center; min-height: 6px; }
+.mg-tray { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; min-height: 56px; }
+.mg-chip {
+  background: #fef08a; border: 3px solid #ca8a04; border-radius: 999px;
+  font-size: clamp(17px, 3vw, 22px); font-weight: 900; color: #1e293b;
+  padding: 9px 16px; cursor: grab; user-select: none; -webkit-user-select: none;
+  touch-action: none;
+}
+.mg-chip.dragging { position: fixed; z-index: 500; cursor: grabbing; transform: scale(1.12); box-shadow: 0 10px 24px rgba(0,0,0,.4); }
+.mg-chip.placed { font-size: 14px; padding: 4px 9px; cursor: default; border-color: #16a34a; background: #dcfce7; }
+.shake-mini { animation: shake .35s ease-in-out; }
+
+/* positioned scene (build-a-plant, tower, tap-find) */
+.mg-scene {
+  position: relative; width: min(92vw, 460px); height: min(58vh, 340px);
+  background: linear-gradient(180deg, #bae6fd 55%, #86efac 55%);
+  border-radius: 20px; border: 4px solid #ffffff88; overflow: hidden;
+}
+.mg-scene-bg { position: absolute; left: 50%; bottom: 4px; transform: translateX(-50%); font-size: 58px; opacity: .8; }
+.mg-target.pos { position: absolute; transform: translate(-50%, 0); min-width: 92px; padding: 5px 7px 7px; }
+.mg-target.pos .t-emoji { font-size: 26px; }
+.mg-find { position: absolute; transform: translate(-50%, 0); text-align: center; cursor: pointer; }
+.mg-find .t-emoji { font-size: clamp(38px, 9vw, 54px); line-height: 1.05; }
+.mg-find .t-label { font-weight: 900; color: #134e4a; font-size: 14px; background: #ffffffcc; border-radius: 8px; padding: 1px 7px; }
+.mg-find.found { filter: none; }
+.mg-find.found .t-emoji { text-shadow: 0 0 18px #fde047; }
+.mg-find.found .t-label { background: #bbf7d0; }
+
+/* choices */
+.mg-choices { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+.mg-choice {
+  background: #fff; border: 4px solid #0d9488; border-radius: 18px;
+  font-size: clamp(18px, 3.4vw, 24px); font-weight: 900; color: #134e4a;
+  padding: 14px 22px; cursor: pointer; min-width: 130px;
+}
+.mg-choice.good { background: #bbf7d0; border-color: #16a34a; }
+.mg-choice.bad { background: #fecaca; border-color: #dc2626; animation: shake .35s; }
+.mg-choice:disabled { opacity: .75; }
+
+/* bins */
+.mg-conveyor { padding: 8px 0; }
+.mg-sort-item { font-size: clamp(22px, 5vw, 30px); animation: slide-in .4s ease-out; }
+@keyframes slide-in { from { transform: translateX(60vw); opacity: 0; } to { transform: none; opacity: 1; } }
+.mg-bins { display: flex; gap: 18px; justify-content: center; flex-wrap: wrap; }
+.mg-bin {
+  background: #ffffffe8; border: 5px dashed #b45309; border-radius: 22px;
+  min-width: 150px; padding: 14px 18px; text-align: center; cursor: pointer;
+}
+.mg-bin .t-emoji { font-size: 46px; }
+.mg-bin .t-label { font-weight: 900; color: #7c2d12; font-size: 17px; }
+.mg-bin.good { border-style: solid; border-color: #16a34a; background: #dcfce7; }
+
+/* magnet lab */
+.mg-lab-grid { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; max-width: 720px; }
+.mg-lab-item {
+  background: #ffffffe8; border-radius: 16px; border: 3px solid #94a3b8;
+  min-width: 104px; padding: 8px; text-align: center;
+}
+.mg-lab-item .t-emoji { font-size: 36px; }
+.mg-lab-item .t-label { font-weight: 800; font-size: 14px; color: #334155; }
+.mg-lab-badge { font-weight: 900; font-size: 13px; min-height: 17px; }
+.mg-lab-item.stuck { border-color: #dc2626; background: #fee2e2; }
+.mg-lab-item.stuck .mg-lab-badge { color: #dc2626; }
+.mg-lab-item.nopull { border-color: #94a3b8; opacity: .8; }
+.mg-lab-item.nopull .mg-lab-badge { color: #64748b; }
+.mg-magnet-dock { padding: 6px; }
+.mg-magnet { font-size: 44px; padding: 6px 18px; background: #fecaca; border-color: #dc2626; }
+.mg-next-btn { margin-top: 6px; }
+
+/* predict + reveal */
+.mg-predict-stage { position: relative; padding-top: 46px; }
+.mg-drop { position: absolute; top: 0; left: 50%; transform: translateX(-50%); font-size: 34px; animation: drop-fall .85s ease-in forwards; pointer-events: none; }
+@keyframes drop-fall { from { top: -6px; opacity: 1; } 85% { opacity: 1; } to { top: 58px; opacity: 0; } }
+.mg-big.soaked { background: #bfdbfe; }
+.mg-big.dry { background: #ffffffde; }

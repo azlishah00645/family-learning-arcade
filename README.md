@@ -8,7 +8,7 @@ KSSR/KSSM (DLP English) syllabus.
 
 | Grade | 📐 Maths | 🔬 Science |
 |---|---|---|
-| Year 1 | 🐒 **Maths Jungle** (ready!) | 🏝️ Science Island (coming soon) |
+| Year 1 | 🐒 **Maths Jungle** (ready!) | 🏝️ **Science Island** (ready!) |
 | Year 3 | 🏃 Sifir Dash (coming soon) | 🧪 Science Lab (coming soon) |
 | Form 1 | ⚔️ Quiz Quest (coming soon) | ⚔️ Quiz Quest (coming soon) |
 
@@ -64,8 +64,10 @@ Do this once, then the kids can play on any phone/tablet from one link.
 
 ## ✏️ Editing questions (no coding!)
 
-All questions live in the `content/` folder — currently
-[`content/y1-maths-questions.js`](content/y1-maths-questions.js).
+All questions live in the `content/` folder:
+- [`content/y1-maths-questions.js`](content/y1-maths-questions.js) — Maths Jungle questions
+- [`content/y1-science-content.js`](content/y1-science-content.js) — Science Island items,
+  labels, answers and experiment predictions
 
 Open the file in any text editor. Every question is one block like this:
 

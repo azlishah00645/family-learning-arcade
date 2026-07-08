@@ -103,8 +103,9 @@ window.FamilyReport = (function () {
       actions.appendChild(b);
     }
     addBtn("🔁 Replay", "orange", opts.onReplay);
-    if (opts.onNext) addBtn("➡️ Next Chapter", "green", opts.onNext);
-    addBtn("🏠 Back to Menu", "blue", opts.onMenu);
+    if (opts.onNext) addBtn("➡️ Next Course", "green", opts.onNext);
+    (opts.extra || []).forEach(function (b) { addBtn(b.label, b.cls || "blue", b.fn); });
+    addBtn("🏠 Menu", "blue", opts.onMenu);
     box.appendChild(actions);
 
     root.appendChild(backdrop);

@@ -1,5 +1,6 @@
 /* ============================================================
-   MATHS JUNGLE QUESTIONS — Year 1 Maths (KSSR Semakan, DLP English)
+   MATHS WORLD QUESTIONS — Year 1 Maths (KSSR Semakan, DLP English)
+   Used by the Obby Academy question checkpoints.
 
    ✏️ HOW TO EDIT (no coding needed!):
    1. Every question is ONE block between { and },
@@ -7,10 +8,11 @@
       after the closing } ), paste it on a new line, and change
       the words inside the "quotes".
    3. The parts of a block:
-        level:      which chapter it belongs to ("M1" to "M8")
+        level:      which chapter/course it belongs to
+                    ("M1" = Course 1 … "M8" = Course 8)
         difficulty: 1 = easy, 2 = medium, 3 = hard
-                    (each game round asks 10 questions: 4 easy,
-                    3 medium, 3 hard — in order, easy first!)
+                    (each course asks 5 questions: 2 easy,
+                    2 medium, 1 hard — in order, easy first!)
         question:   the question the child sees
         choices:    THREE answers in [ ], each in "quotes"
         answer:     the correct one — must match a choice EXACTLY

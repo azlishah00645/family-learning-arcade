@@ -31,12 +31,15 @@ window.ProfileStore = (function () {
     current: function () { return byId(data.currentId); },
     setCurrent: function (id) { data.currentId = id; save(); },
 
-    create: function (name, avatar, grade) {
+    create: function (name, avatar, grade, colors) {
       const p = {
         id: "p" + Date.now().toString(36) + Math.random().toString(36).slice(2, 6),
         name: name.trim(),
         avatar: avatar,
         grade: grade,
+        colors: colors || null,   /* {skin, shirt, pants} for the 3D blocky avatar */
+        coins: 0,                  /* shared wallet across worlds (pet eggs) */
+        pets: { owned: [], active: null },
         created: Date.now(),
         progress: {}
       };

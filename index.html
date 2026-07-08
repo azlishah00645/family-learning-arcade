@@ -3,44 +3,46 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <title>Family Learning Arcade</title>
+  <title>Obby Academy</title>
   <link rel="stylesheet" href="src/style.css">
 </head>
 <body>
-  <!-- Hub screens render here -->
+  <!-- 3D canvas lives here, always behind the UI -->
+  <div id="stage"></div>
+
+  <!-- Hub screens / menus render here -->
   <div id="app"></div>
 
-  <!-- Games render here (Phaser canvas + touch controls) -->
-  <div id="game-root" class="hidden">
-    <div id="game-container"></div>
-  </div>
+  <!-- In-game HUD (coins, hearts-free!, home button, touch controls) -->
+  <div id="hud-root"></div>
 
-  <!-- Popups, question gates, family report, certificates -->
+  <!-- Popups: questions, family report, hatching, certificates -->
   <div id="overlay-root"></div>
 
-  <!-- Phaser 3 engine -->
-  <script src="https://cdn.jsdelivr.net/npm/phaser@3.80.1/dist/phaser.min.js"></script>
+  <!-- Three.js (r160) -->
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+    }
+  }
+  </script>
 
   <!-- Question / content banks (safe to edit — see file headers) -->
   <script src="content/y1-maths-questions.js"></script>
-  <script src="content/y1-science-content.js"></script>
 
-  <!-- Core -->
+  <!-- Core (classic scripts, shared with all worlds) -->
   <script src="src/profiles.js"></script>
   <script src="src/shared/sound.js"></script>
   <script src="src/shared/stars.js"></script>
-  <script src="src/shared/touchControls.js"></script>
   <script src="src/shared/questionPopup.js"></script>
   <script src="src/shared/siblingCompare.js"></script>
-  <script src="src/shared/minigameFramework.js"></script>
 
-  <!-- Hub + game registry (games register themselves below) -->
+  <!-- 3D engine + worlds (ES modules; they register into the hub registry) -->
+  <script type="module" src="src/main.js"></script>
+
+  <!-- Hub boots on DOMContentLoaded (after modules have registered) -->
   <script src="src/hub.js"></script>
-
-  <!-- Games -->
-  <script src="src/games/maths-jungle/levels.js"></script>
-  <script src="src/games/maths-jungle/game.js"></script>
-  <script src="src/games/science-island/zones.js"></script>
-  <script src="src/games/science-island/game.js"></script>
 </body>
 </html>

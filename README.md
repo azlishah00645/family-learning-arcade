@@ -1,132 +1,127 @@
-# 🎮 Family Learning Arcade
+# 🎮 Obby Academy
 
-One web app, one link, games for all three kids — built around the Malaysian
-KSSR/KSSM (DLP English) syllabus.
+A 3D obstacle-course ("obby") learning game for kids — jump across floating
+islands, dodge spinning bars, answer questions from the Malaysian KSSR
+textbook at glowing checkpoints, earn coins, and hatch collectible pets that
+follow you around. Built with Three.js, runs in any modern browser, saves on
+the device (no accounts, no internet needed after loading).
 
-**How it works:** open the app → choose your profile → choose a subject
-(📐 Maths or 🔬 Science) → the right game for your grade starts.
+**Flow:** choose your profile → pick a world (📐 Maths / 🔬 Science) →
+play courses → earn coins → hatch pets 🥚
 
 | Grade | 📐 Maths | 🔬 Science |
 |---|---|---|
-| Year 1 | 🐒 **Maths Jungle** (ready!) | 🏝️ **Science Island** (ready!) |
-| Year 3 | 🏃 Sifir Dash (coming soon) | 🧪 Science Lab (coming soon) |
-| Form 1 | ⚔️ Quiz Quest (coming soon) | ⚔️ Quiz Quest (coming soon) |
+| Year 1 | 🌍 **Maths World** — 8 obby courses (ready!) | Science World (coming soon) |
+| Year 3 | coming later | coming later |
+| Form 1 | coming later | coming later |
 
-Everything is saved on the device (no internet account needed). Each child has
-their own profile, and after every chapter the **Family Report** compares
-stars with their siblings — friendly competition included 😄
+**Maths World courses** (= Year 1 KSSR Semakan chapters):
+Counting Meadows · Sunny Bridge Run · Pizza Peaks · Coin Canyon ·
+Clocktower Climb · Giant's Kitchen · Geometry Galaxy · Chart City
 
----
-
-## ▶️ How to run it on your computer
-
-You can't just double-click `index.html` (browsers block the game files that
-way). You need a tiny local server — pick ONE of these:
-
-**Option A — VS Code (easiest if you have it):**
-1. Install the free "Live Server" extension in VS Code.
-2. Open this folder in VS Code.
-3. Right-click `index.html` → **Open with Live Server**. Done!
-
-**Option B — Command line (needs Node.js installed):**
-1. Open a terminal / PowerShell in this folder.
-2. Type: `npx serve .`
-3. Open the address it shows (usually `http://localhost:3000`).
+**Controls:** desktop = WASD/arrows + Space to jump, drag to look around.
+Phone/tablet = left joystick + big JUMP button.
 
 ---
+
+## ▶️ Run it on your computer
+
+You can't double-click `index.html` (browsers block the 3D files that way).
+Use a tiny local server — pick ONE:
+
+**Option A — VS Code:** install the free "Live Server" extension → open this
+folder → right-click `index.html` → **Open with Live Server**.
+
+**Option B — Command line (needs Node.js):** open a terminal in this folder,
+type `npx serve .`, then open the address it shows.
+
+> Internet is needed the first time (the 3D engine loads from a CDN); after
+> that the browser caches it.
 
 ## 🌍 Put it online for FREE (GitHub Pages)
 
-Do this once, then the kids can play on any phone/tablet from one link.
+1. Create a free account at [github.com](https://github.com).
+2. **+** (top right) → **New repository** → name it, keep **Public** → create.
+3. On the repo page click **uploading an existing file** and drag EVERYTHING
+   in this folder (`index.html`, `src`, `content`, `assets`) into it → **Commit changes**.
+4. **Settings → Pages** → Branch: **main**, folder **/(root)** → **Save**.
+5. Wait ~2 minutes, refresh — GitHub shows your link:
+   `https://YOURNAME.github.io/REPONAME/`. Open it on the kids' devices and
+   **Add to Home Screen**. 🎉
 
-1. Go to [github.com](https://github.com) and sign in (create a free account
-   if you don't have one).
-2. Click the **+** at the top right → **New repository**.
-3. Name it `family-learning-arcade`, keep it **Public**, click
-   **Create repository**.
-4. On the new repo page, click **uploading an existing file**.
-5. Drag **everything inside this folder** (the `index.html` file and the
-   `src` and `content` folders) into the upload box. Wait, then click
-   **Commit changes**.
-6. In the repo, go to **Settings → Pages** (left sidebar).
-7. Under "Branch", choose **main** and folder **/(root)**, click **Save**.
-8. Wait 1–2 minutes, refresh the page — GitHub shows your link, e.g.
-   `https://YOURNAME.github.io/family-learning-arcade/`
-9. Open that link on the kids' devices and bookmark it. 🎉
+**To update later:** upload the changed files again — same link.
 
-**To update the app later:** upload the changed files again the same way
-(step 4–5). The link stays the same.
-
-> ⭐ Progress and stars are saved **per device** (in the browser). Each child
-> should always play on the same device, and don't clear the browser data.
+> ⭐ Progress, coins and pets save **per device** (browser storage). Each
+> child should play on the same device; don't clear browser data.
 
 ---
 
-## ✏️ Editing questions (no coding!)
+## ✏️ Edit the questions (no coding!)
 
-All questions live in the `content/` folder:
-- [`content/y1-maths-questions.js`](content/y1-maths-questions.js) — Maths Jungle questions
-- [`content/y1-science-content.js`](content/y1-science-content.js) — Science Island items,
-  labels, answers and experiment predictions
-
-Open the file in any text editor. Every question is one block like this:
+Open [`content/y1-maths-questions.js`](content/y1-maths-questions.js) in any
+text editor. Every question is one copy-paste block:
 
 ```js
-{ level: "M2", question: "4 + 3 = ?", choices: ["6","7","8"], answer: "7", emoji: "🧮" },
+{ level: "M2", difficulty: 1, question: "4 + 3 = ?", choices: ["6","7","8"], answer: "7" },
 ```
 
-- **To change a question:** edit the words inside the `"quotes"` and save.
-- **To add a question:** copy a whole block (including the comma at the end),
-  paste it on a new line, and edit it.
-- `answer` must match one of the `choices` **exactly**.
-- The header at the top of the file explains the picture questions
-  (clocks, fractions, money, shapes, pictographs).
+- `level`: `"M1"`–`"M8"` = Course 1–8 · `difficulty`: 1 easy / 2 medium / 3 hard
+- `answer` must match one choice EXACTLY
+- Picture questions (clocks, fraction pizzas, money, shapes, pictographs)
+  are explained in the file header
+- Each course asks 5 per run (2 easy + 2 medium + 1 hard, easy first)
 
-Save the file, refresh the game — that's it.
+## 🐾 Add a pet (one line!)
 
-## 📖 Chapter names
+Open [`src/pets.js`](src/pets.js), find `PET_SPECIES`, copy any line and
+change the name/colors:
 
-Chapter names and order live in
-[`src/games/maths-jungle/levels.js`](src/games/maths-jungle/levels.js) —
-edit the text in quotes, no coding needed. The `id` (M1–M8) must match the
-`level` field in the questions file.
+```js
+{ id: "hamster", name: "Hamster", rarity: "common", body: "round", color: "#fbbf24", ears: "round", tail: "puff" },
+```
+
+`rarity`: common / rare / epic / legendary · `body`: "box" or "round" ·
+`ears`: cat / bunny / round / flop / none · extras: `mane`, `antlers`,
+`horn: true`, `wings: "small"|"big"`, `beak: true`, `shell`, `mask`, `snout`.
+
+## 💰 Game economy (for reference)
+
+Correct answer **+10** coins (replays +5) · scattered coins **+1** ·
+first completion of a course **+50 and a FREE Basic Egg** ·
+Egg Shop: Basic 100 / Golden 250 / Mystery 500 ·
+Hatch odds (Basic): 60% Common / 30% Rare / 9% Epic / 1% Legendary —
+better eggs shift the odds up.
 
 ---
 
-## 🧩 For future build sessions: how games plug in
+## 🧩 For future build sessions: how worlds plug in
 
-The hub renders the subject cards **from the game registry** — nothing is
-hardcoded. A new game is one folder in `src/games/` plus one `register()`
-call:
+The hub renders subject cards **from the registry** — nothing hardcoded:
 
 ```js
 gameRegistry.register({
-  id: "science-island",        // unique — also the progress-save key
-  title: "Science Island",
-  grade: "Year 1",             // "Year 1" | "Year 3" | "Form 1"
-  subject: "science",          // "maths" | "science"
-  icon: "🏝️",
-  launch: function ({ containerId, profile, onExit }) {
-    // build your game inside #containerId, call onExit() to go back.
-    // Return { destroy() } so the hub can clean up.
-  }
+  id: "science-world", title: "Science World",
+  grade: "Year 1",          // "Year 1" | "Year 3" | "Form 1"
+  subject: "science",       // "maths" | "science"
+  icon: "🔬",
+  launch({ containerId, profile, onExit }) { /* return { destroy() } */ }
 });
 ```
 
-Then add its `<script>` tags to `index.html` (under "Games"). A game may
-register twice (Quiz Quest registers for both subjects).
+Add the module to `src/main.js` imports (ES module) — done.
 
-**Shared components every game should use** (in `src/shared/`):
+**The building blocks** (all reusable):
 
 | File | What it gives you |
 |---|---|
-| `questionPopup.js` | Big friendly question popup (`QuestionPopup.show(q, {index,total})` → Promise with `{firstTry}`) |
-| `siblingCompare.js` | **Family Report** screen — call `FamilyReport.show({...})` after EVERY chapter/level/run |
-| `stars.js` | Star strings, per-subject totals, `FX.confetti()` / `FX.praise()` |
-| `sound.js` | Web Audio bleeps that respect the parent sound toggle |
-| `touchControls.js` | On-screen ◀ ▶ ⬆ buttons for phones |
-| `profiles.js` (in `src/`) | `ProfileStore.getProgress(profileId, gameId)` → mutate → `ProfileStore.saveProgress()` |
+| [`src/engine.js`](src/engine.js) | Renderer, sky/fog/lights, Kenney GLB loader (`Assets`), blocky avatar (`buildCharacter`), **CharacterController** (jump feel: coyote time, buffer, air control), touch joystick, quality toggle |
+| [`src/obby.js`](src/obby.js) | `runCourse({theme, elements, questions, …})` — platforms, movers, vanish tiles, conveyors, spinners, coins, checkpoints, question gates, finish portal, respawns, HUD, pet follower |
+| [`src/worlds/maths-world.js`](src/worlds/maths-world.js) | Example world: themed course generator + map screen + progress + Family Report — copy this shape for new worlds |
+| [`src/pets.js`](src/pets.js) | Pet species, egg shop, hatch ceremony, collection screen, `buildActivePet(profile)` — shared wallet & collection across all worlds |
+| `src/shared/` | `questionPopup.js` (question panel + drawn visuals), `siblingCompare.js` (**Family Report** — call after EVERY course), `sound.js`, `stars.js` |
+| `src/profiles.js` | Profiles, per-profile progress (`prog.levels[courseId] = {stars, passed…}`), coins, pets, settings |
 
-Progress convention: `prog.levels = { levelId: { stars, best, passed, ... } }`
-(plus optional `prog.bonusStars` for score-based games) — then the hub's star
-board and subject cards count everything automatically.
+Progress convention: save under `prog.levels[courseId]` and the hub's star
+board + subject cards count everything automatically.
+
+*(The old 2D version of this app is preserved on the `2d-arcade` git branch.)*

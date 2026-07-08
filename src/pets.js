@@ -40,10 +40,17 @@ export const PET_SPECIES = [
   { id: "wolf",    name: "Wolf",    rarity: "epic", body: "box",   color: "#6b7280", belly: "#e5e7eb", ears: "cat",   tail: "puff" },
   { id: "deer",    name: "Deer",    rarity: "epic", body: "box",   color: "#b45309", belly: "#fef3c7", ears: "flop",  antlers: true, tail: "puff" },
   { id: "robocat", name: "Robo-Cat", rarity: "epic", body: "box",  color: "#38bdf8", belly: "#0ea5e9", ears: "cat",   tail: "straight", robo: true },
+  /* --- science pets (Science World launch) --- */
+  { id: "jellyfish", name: "Jellyfish", rarity: "common", body: "round", color: "#c4b5fd", belly: "#ede9fe", ears: "none", tail: "puff" },
+  { id: "axolotl",   name: "Axolotl",   rarity: "rare",   body: "round", color: "#f9a8d4", belly: "#fce7f3", ears: "bunny", tail: "straight" },
+  { id: "chameleon", name: "Chameleon", rarity: "rare",   body: "box",   color: "#84cc16", belly: "#d9f99d", ears: "round", tail: "curl" },
+  { id: "octopus",   name: "Octopus",   rarity: "epic",   body: "round", color: "#f472b6", belly: "#fbcfe8", ears: "round", tail: "puff" },
+  { id: "robobee",   name: "Robo-Bee",  rarity: "epic",   body: "round", color: "#fde047", belly: "#78350f", ears: "none", wings: "small", robo: true },
   /* --- legendary --- */
   { id: "dragon",  name: "Dragon",  rarity: "legendary", body: "box",   color: "#10b981", belly: "#a7f3d0", ears: "none", horn: true, wings: "big", tail: "straight" },
   { id: "unicorn", name: "Unicorn", rarity: "legendary", body: "box",   color: "#f8fafc", belly: "#fbcfe8", ears: "cat",  horn: true, mane: "#f0abfc", tail: "puff" },
-  { id: "phoenix", name: "Phoenix", rarity: "legendary", body: "round", color: "#f97316", belly: "#fde047", ears: "none", beak: true, wings: "big", flame: true }
+  { id: "phoenix", name: "Phoenix", rarity: "legendary", body: "round", color: "#f97316", belly: "#fde047", ears: "none", beak: true, wings: "big", flame: true },
+  { id: "goldtortoise", name: "Golden Tortoise", rarity: "legendary", body: "round", color: "#fbbf24", belly: "#fde68a", ears: "none", shell: "#b45309" }
 ];
 
 export const EGGS = {

@@ -12,7 +12,9 @@ import {
 } from "./engine.js";
 import { KENNEY_MODELS, Props } from "./obby.js";
 import { PetSystem, PET_SPECIES, EGGS, buildPet, rollRarity, Showcase } from "./pets.js";
+import "./stations.js";
 import "./worlds/maths-world.js";
+import "./worlds/science-world.js";
 
 /* ---------------- title-screen background ---------------- */
 let titleRunning = false;

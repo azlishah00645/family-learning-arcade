@@ -11,13 +11,21 @@ play courses → earn coins → hatch pets 🥚
 
 | Grade | 📐 Maths | 🔬 Science |
 |---|---|---|
-| Year 1 | 🌍 **Maths World** — 8 obby courses (ready!) | Science World (coming soon) |
+| Year 1 | 🌍 **Maths World** — 8 obby courses (ready!) | 🔬 **Science World** — 10 obby courses (ready!) |
 | Year 3 | coming later | coming later |
 | Form 1 | coming later | coming later |
 
 **Maths World courses** (= Year 1 KSSR Semakan chapters):
 Counting Meadows · Sunny Bridge Run · Pizza Peaks · Coin Canyon ·
 Clocktower Climb · Giant's Kitchen · Geometry Galaxy · Chart City
+
+**Science World courses** (= Science Year 1 KSSR Semakan units):
+Observation Outpost · Safety Lab · Body Bay · Sorting Swamp ·
+Animal Archipelago · Garden Grove · Magnet Mines · Sponge Springs ·
+Earth Overlook · Builder's Workshop — with hands-on **science stations**
+(drag-the-senses, spot-the-danger, living/non-living sorting, build-a-plant,
+magnet lab, soak-or-not predictions, find-it-on-Earth, build-the-tower)
+at checkpoints 3, 6 and 9 of every course.
 
 **Controls:** desktop = WASD/arrows + Space to jump, drag to look around.
 Phone/tablet = left joystick + big JUMP button.
@@ -70,9 +78,18 @@ text editor. Every question is one copy-paste block:
 - Picture questions (clocks, fraction pizzas, money, shapes, pictographs)
   are explained in the file header
 - Each course asks 10 per run (4 easy + 3 medium + 3 hard, easy first)
-- **Unlocking:** all 10 correct on the FIRST try (3⭐) unlocks the next
-  course. 8–9/10 = 2⭐, otherwise 1⭐ — replay to improve!
+- **Unlocking (Maths):** all 10 correct on the FIRST try (3⭐) unlocks the
+  next course. 8–9/10 = 2⭐, otherwise 1⭐ — replay to improve!
   (To make it easier, lower `PASS_NEED` in `src/worlds/maths-world.js`.)
+
+**Science questions** live in
+[`content/y1-science-content.js`](content/y1-science-content.js) — same
+copy-paste style (`unit: "U1".."U10"`, difficulty 1–3, 30 per unit).
+Checkpoints run easy → hard: 1–4 easy, 5–7 medium, 8–10 hard, and
+checkpoints 3/6/9 are **stations** — their draggable items/labels/answers
+are edited at the bottom of the same file (one item per line).
+**Unlocking (Science):** at least 7/10 first-try passes; 10/10 = 3⭐,
+8–9 = 2⭐, 7 = 1⭐ (`PASS_NEED` in `src/worlds/science-world.js`).
 
 ## 🐾 Add a pet (one line!)
 

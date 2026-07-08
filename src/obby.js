@@ -428,7 +428,12 @@ export function runCourse(opts) {
     ctrl.frozen = true;
     respawnPoint = new THREE.Vector3(qp.x, qp.y + 0.2, qp.z);
     Sound.coin();
-    QuestionPopup.show(opts.questions[idx], { index: idx + 1, total: opts.questions.length })
+    const q = opts.questions[idx];
+    /* a checkpoint can be an MCQ or an interactive STATION (science) */
+    const runner = (q && q.type === "station" && window.Stations)
+      ? window.Stations.run(q.station, q.config, { index: idx + 1, total: opts.questions.length })
+      : QuestionPopup.show(q, { index: idx + 1, total: opts.questions.length });
+    runner
       .then(function (res) {
         results[idx] = !!res.firstTry;
         addCoins(opts.coinFactor < 1 ? 5 : 10);
@@ -564,6 +569,7 @@ export function runCourse(opts) {
   const handle = {
     /* handles for automated tests */
     _ctrl: ctrl,
+    _questions: opts.questions,
     _qPoints: qPoints,
     _coins: coins,
     _checkpoints: checkpoints,

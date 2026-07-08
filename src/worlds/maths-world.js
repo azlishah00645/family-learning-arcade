@@ -104,9 +104,12 @@ export function generateCourse(courseIdx) {
       }
       if (rng() < 0.65) els.push({ t: "coin", x: x, y: y, z: z });
 
-      /* mid-segment friendly checkpoint on longer courses */
-      if (j === Math.floor(jumpsPerSeg / 2) && jumpsPerSeg >= 6) {
-        els.push({ t: "check", x: x, y: y, z: z });
+      /* mid-segment QUESTION checkpoint on a wide platform
+         (2 questions per segment × 5 segments = 10 per course) */
+      if (j === Math.floor(jumpsPerSeg / 2)) {
+        z -= gap;
+        els.push({ t: "plat", x: x, y: y, z: z, w: 5, d: 4.5 });
+        els.push({ t: "q", x: x, y: y, z: z });
       }
     }
 
@@ -134,7 +137,10 @@ export function generateCourse(courseIdx) {
 
 /* ---------------- questions: reuse the Year 1 bank ----------------
    Bank uses level:"M1".."M8" — course C1..C8 maps 1:1.
-   Picks 5 (2 easy, 2 medium, 1 hard), ordered easy → hard. */
+   Picks 10 (4 easy, 3 medium, 3 hard), ordered easy → hard. */
+const Q_PER_COURSE = 10;
+const PASS_NEED = 10; /* first-try correct needed to unlock the next course */
+
 function pickQuestions(courseId) {
   const lvl = "M" + courseId.slice(1);
   const bank = (window.Y1_MATHS_QUESTIONS || []).filter(function (q) { return q.level === lvl; });
@@ -143,10 +149,14 @@ function pickQuestions(courseId) {
     for (let i = t.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); const tmp = t[i]; t[i] = t[j]; t[j] = tmp; }
     return t;
   }
-  let picked = tier(1).slice(0, 2).concat(tier(2).slice(0, 2), tier(3).slice(0, 1));
-  while (picked.length < 5 && bank.length) picked.push(bank[Math.floor(Math.random() * bank.length)]);
+  let picked = tier(1).slice(0, 4).concat(tier(2).slice(0, 3), tier(3).slice(0, 3));
+  if (picked.length < Q_PER_COURSE) {
+    const left = bank.filter(function (q) { return picked.indexOf(q) === -1; });
+    picked = picked.concat(left.slice(0, Q_PER_COURSE - picked.length));
+  }
+  while (picked.length < Q_PER_COURSE && bank.length) picked.push(bank[Math.floor(Math.random() * bank.length)]);
   picked.sort(function (a, b) { return (a.difficulty || 2) - (b.difficulty || 2); });
-  return picked.slice(0, 5);
+  return picked.slice(0, Q_PER_COURSE);
 }
 
 /* ---------------- progress ---------------- */
@@ -246,8 +256,9 @@ function finishCourse(i, res) {
   const firstCompletion = d.plays === 0;
   d.plays++;
 
-  const stars = res.firstTry === 5 ? 3 : (res.firstTry === 4 ? 2 : 1);
-  const passed = res.firstTry >= 4;
+  /* PERFECT run required: 10/10 first-try unlocks the next course */
+  const stars = res.firstTry === Q_PER_COURSE ? 3 : (res.firstTry >= Q_PER_COURSE - 2 ? 2 : 1);
+  const passed = res.firstTry >= PASS_NEED;
   d.stars = Math.max(d.stars, stars);
   d.firstTry = Math.max(d.firstTry, res.firstTry);
   d.passed = d.passed || passed;
@@ -278,8 +289,8 @@ function finishCourse(i, res) {
         stars: stars,
         headline: [
           { label: "Coins earned", value: "🪙 " + earned + (freeEgg ? " + FREE EGG 🥚" : "") },
-          { label: "First-try answers", value: res.firstTry + " / 5" },
-          { label: passed ? "PASSED!" : "Keep trying!", value: passed ? "✅" : "💪" }
+          { label: "First-try answers", value: res.firstTry + " / " + Q_PER_COURSE },
+          { label: passed ? "PERFECT! Next course unlocked!" : "Get " + PASS_NEED + "/" + Q_PER_COURSE + " to unlock the next course!", value: passed ? "✅" : "💪" }
         ]
       },
       columns: [{ key: "stars", label: "Stars" }, { key: "coins", label: "Best coins" }],

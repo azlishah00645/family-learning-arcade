@@ -69,7 +69,10 @@ text editor. Every question is one copy-paste block:
 - `answer` must match one choice EXACTLY
 - Picture questions (clocks, fraction pizzas, money, shapes, pictographs)
   are explained in the file header
-- Each course asks 5 per run (2 easy + 2 medium + 1 hard, easy first)
+- Each course asks 10 per run (4 easy + 3 medium + 3 hard, easy first)
+- **Unlocking:** all 10 correct on the FIRST try (3⭐) unlocks the next
+  course. 8–9/10 = 2⭐, otherwise 1⭐ — replay to improve!
+  (To make it easier, lower `PASS_NEED` in `src/worlds/maths-world.js`.)
 
 ## 🐾 Add a pet (one line!)
 

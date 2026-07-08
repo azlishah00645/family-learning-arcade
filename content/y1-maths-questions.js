@@ -11,8 +11,9 @@
         level:      which chapter/course it belongs to
                     ("M1" = Course 1 … "M8" = Course 8)
         difficulty: 1 = easy, 2 = medium, 3 = hard
-                    (each course asks 5 questions: 2 easy,
-                    2 medium, 1 hard — in order, easy first!)
+                    (each course asks 10 questions: 4 easy,
+                    3 medium, 3 hard — in order, easy first!
+                    ALL 10 first-try = next course unlocks)
         question:   the question the child sees
         choices:    THREE answers in [ ], each in "quotes"
         answer:     the correct one — must match a choice EXACTLY

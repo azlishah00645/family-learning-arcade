@@ -358,8 +358,10 @@ export function runCourse(opts) {
   hud.innerHTML =
     '<button class="btn small grey" id="obby-exit">✖</button>' +
     '<span class="hud-course">' + opts.title + "</span>" +
+    (opts.timer ? '<span class="hud-timer" id="hud-timer">0:00</span>' : "") +
     '<span class="hud-coins">🪙 <b id="hud-coins">0</b></span>';
   document.getElementById("hud-root").appendChild(hud);
+  const timerEl = opts.timer ? hud.querySelector("#hud-timer") : null;
   TouchUI.show();
 
   let running = true, finished = false;
@@ -463,6 +465,12 @@ export function runCourse(opts) {
     ctrl.update(dt);
     movers.forEach(function (fn) { fn(dt, t); });
 
+    /* speed-run timer (Year 3 worlds) */
+    if (timerEl && !finished) {
+      const s = (performance.now() - t0) / 1000;
+      timerEl.textContent = Math.floor(s / 60) + ":" + ("0" + Math.floor(s % 60)).slice(-2);
+    }
+
     /* coins */
     for (let i = coins.length - 1; i >= 0; i--) {
       const c = coins[i];
@@ -529,7 +537,7 @@ export function runCourse(opts) {
           firstTry: results.filter(Boolean).length,
           total: opts.questions.length,
           coins: coinCount,
-          timeSec: Math.round((performance.now() - t0) / 1000)
+          timeSec: Math.round((performance.now() - t0) / 100) / 10
         });
       }, 900);
     }

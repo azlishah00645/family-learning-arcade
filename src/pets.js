@@ -40,6 +40,12 @@ export const PET_SPECIES = [
   { id: "wolf",    name: "Wolf",    rarity: "epic", body: "box",   color: "#6b7280", belly: "#e5e7eb", ears: "cat",   tail: "puff" },
   { id: "deer",    name: "Deer",    rarity: "epic", body: "box",   color: "#b45309", belly: "#fef3c7", ears: "flop",  antlers: true, tail: "puff" },
   { id: "robocat", name: "Robo-Cat", rarity: "epic", body: "box",  color: "#38bdf8", belly: "#0ea5e9", ears: "cat",   tail: "straight", robo: true },
+  /* --- adventure pets (Year 3 launch) --- */
+  { id: "gecko",   name: "Gecko",   rarity: "common", body: "box",   color: "#84cc16", belly: "#d9f99d", ears: "none", tail: "straight" },
+  { id: "falcon",  name: "Falcon",  rarity: "rare",   body: "round", color: "#78350f", belly: "#fbbf24", ears: "none", beak: true, wings: "small" },
+  { id: "shark",   name: "Shark",   rarity: "rare",   body: "box",   color: "#64748b", belly: "#f1f5f9", ears: "none", tail: "straight", horn: true },
+  { id: "tiger",   name: "Tiger",   rarity: "epic",   body: "box",   color: "#f59e0b", belly: "#fde68a", ears: "round", mask: "#1e293b", tail: "straight" },
+  { id: "raptor",  name: "Raptor",  rarity: "epic",   body: "box",   color: "#15803d", belly: "#bbf7d0", ears: "none", tail: "straight", antlers: true },
   /* --- science pets (Science World launch) --- */
   { id: "jellyfish", name: "Jellyfish", rarity: "common", body: "round", color: "#c4b5fd", belly: "#ede9fe", ears: "none", tail: "puff" },
   { id: "axolotl",   name: "Axolotl",   rarity: "rare",   body: "round", color: "#f9a8d4", belly: "#fce7f3", ears: "bunny", tail: "straight" },
@@ -50,7 +56,8 @@ export const PET_SPECIES = [
   { id: "dragon",  name: "Dragon",  rarity: "legendary", body: "box",   color: "#10b981", belly: "#a7f3d0", ears: "none", horn: true, wings: "big", tail: "straight" },
   { id: "unicorn", name: "Unicorn", rarity: "legendary", body: "box",   color: "#f8fafc", belly: "#fbcfe8", ears: "cat",  horn: true, mane: "#f0abfc", tail: "puff" },
   { id: "phoenix", name: "Phoenix", rarity: "legendary", body: "round", color: "#f97316", belly: "#fde047", ears: "none", beak: true, wings: "big", flame: true },
-  { id: "goldtortoise", name: "Golden Tortoise", rarity: "legendary", body: "round", color: "#fbbf24", belly: "#fde68a", ears: "none", shell: "#b45309" }
+  { id: "goldtortoise", name: "Golden Tortoise", rarity: "legendary", body: "round", color: "#fbbf24", belly: "#fde68a", ears: "none", shell: "#b45309" },
+  { id: "mechadragon", name: "Mecha-Dragon", rarity: "legendary", body: "box", color: "#38bdf8", belly: "#0ea5e9", ears: "cat", horn: true, wings: "big", tail: "straight", robo: true }
 ];
 
 export const EGGS = {

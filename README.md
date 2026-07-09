@@ -12,8 +12,17 @@ play courses → earn coins → hatch pets 🥚
 | Grade | 📐 Maths | 🔬 Science |
 |---|---|---|
 | Year 1 | 🌍 **Maths World** — 8 obby courses (ready!) | 🔬 **Science World** — 10 obby courses (ready!) |
-| Year 3 | coming later | coming later |
+| Year 3 | 🏔️ **Maths World Y3** — 9 courses + speed-run timer (ready!) | coming soon |
 | Form 1 | coming later | coming later |
+
+**Year 3 Maths courses** (= Year 3 KSSR Semakan chapters, tuned harder —
+faster movers, longer jumps, a vertical climb in every course, and a
+⏱️ speed-run timer with personal bests + sibling best times):
+Summit of Thousands · Operation Volcano · Slice Station · Bazaar Rush ·
+Chrono Canyon · Mega Lab Gauntlet · Prism Peaks · Grid City Heist ·
+Stat Stadium — stations at checkpoints 4 & 8 (build-the-number,
+60-second **Sifir Sprint**, fraction slice-match, bazaar cashier,
+clock setter, measure-it, shape factory, treasure grid, chart builder).
 
 **Maths World courses** (= Year 1 KSSR Semakan chapters):
 Counting Meadows · Sunny Bridge Run · Pizza Peaks · Coin Canyon ·
@@ -90,6 +99,18 @@ checkpoints 3/6/9 are **stations** — their draggable items/labels/answers
 are edited at the bottom of the same file (one item per line).
 **Unlocking (Science):** at least 7/10 first-try passes; 10/10 = 3⭐,
 8–9 = 2⭐, 7 = 1⭐ (`PASS_NEED` in `src/worlds/science-world.js`).
+
+**Year 3 Maths questions** come from TWO places:
+- [`content/y3-maths-questions.js`](content/y3-maths-questions.js) — fixed
+  word/concept questions (24+ per chapter, copy-paste editable; station
+  items like shop prices and chart tallies are at the bottom of the file)
+- [`content/y3-math-engine.js`](content/y3-math-engine.js) — automatic
+  arithmetic generator for C1–C4 (place value, sifir, fractions, money)
+  with plausible wrong answers. You normally never edit this one.
+
+**Unlocking (Year 3):** at least 7/10 first-try; 10/10 = 3⭐, 8–9 = 2⭐,
+7 = 1⭐ (`PASS_NEED` in `src/worlds/maths-world-y3.js`). The ⏱️ timer is
+for bragging rights only — it never affects passing.
 
 ## 🐾 Add a pet (one line!)
 

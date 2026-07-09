@@ -383,6 +383,8 @@ types.tapFind = function (host, cfg, api) {
 /* ---------- runner ---------- */
 export const Stations = {
   types: types,
+  _drag: makeDraggable,   /* reused by grade-specific station packs */
+  _reset: resetChip,
   /* run(type, cfg, meta) → Promise<{firstTry}> */
   run: function (type, cfg, meta) {
     return new Promise(function (resolve) {

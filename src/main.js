@@ -13,8 +13,10 @@ import {
 import { KENNEY_MODELS, Props } from "./obby.js";
 import { PetSystem, PET_SPECIES, EGGS, buildPet, rollRarity, Showcase } from "./pets.js";
 import "./stations.js";
+import "./stations-y3.js";
 import "./worlds/maths-world.js";
 import "./worlds/science-world.js";
+import "./worlds/maths-world-y3.js";
 
 /* ---------------- title-screen background ---------------- */
 let titleRunning = false;
